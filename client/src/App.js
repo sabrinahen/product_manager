@@ -1,12 +1,18 @@
-import Product from "./components/Product"
+// import Product from "./components/Product";
+import React, { useState } from 'react';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './App.css';
+import Main from "../views/Main";
 
 function App() {
   return (
-    <div className="App">
-      <Product path="/" />
-    </div>
+    <BrowserRouter>
+        <div className="App">
+          <Routes>
+            <Route element={<Main/>} path="/" />
+          </Routes>
+        </div>
+    </BrowserRouter>
   );
 }
 

@@ -12,5 +12,17 @@ module.exports = {
             res.status(400).json(err)
         })
     },
+
+    findAllProducts: (req, res)=>{
+        Movie.find()
+            .then((allProducts)=>{
+                console.log(allProducts);
+                res.json(allProducts)
+            })
+            .catch((err)=>{
+                console.log("findAllProducts has failed");
+                res.json({message: "Something went wrong with findAll", error: err})
+            })
+    },
 }
     
