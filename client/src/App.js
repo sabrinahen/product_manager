@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './App.css';
 import Home from "./views/Home";
+import DisplayOneProduct from "./components/DisplayOneProduct"
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route element={<Home/>} path="/" />
+            <Route element={<DisplayOneProduct />} path="/products/:id" />
           </Routes>
         </div>
     </BrowserRouter>

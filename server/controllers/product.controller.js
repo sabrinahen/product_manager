@@ -2,7 +2,7 @@ const Product = require("../models/product.model.js");
 
 module.exports = {
     creatNewProduct: (req, res)=>{
-        Movie.create(req.body)
+        Product.create(req.body)
         .then((newProduct)=>{
             console.log(newProduct);
             res.json(newProduct)
@@ -14,7 +14,7 @@ module.exports = {
     },
 
     findAllProducts: (req, res)=>{
-        Movie.find()
+        Product.find()
             .then((allProducts)=>{
                 console.log(allProducts);
                 res.json(allProducts)
@@ -22,6 +22,18 @@ module.exports = {
             .catch((err)=>{
                 console.log("findAllProducts has failed");
                 res.json({message: "Something went wrong with findAll", error: err})
+            })
+    },
+
+    findOneProduct: (req, res)=>{
+        Product.findOne({_id: req.params.id})
+            .then((oneProduct)=>{
+                console.log(oneProduct);
+                res.json(oneProduct);
+            })
+            .catch((err)=>{
+                console.log("findOneProduct has failed!");
+                res.json({message: "Something went wrong with findOneProduct", error: err})
             })
     },
 }

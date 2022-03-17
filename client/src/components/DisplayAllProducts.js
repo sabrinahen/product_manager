@@ -12,7 +12,7 @@ const DisplayAllProducts = (props)=> {
         axios.get("http://localhost:8000/api/products")
         .then((res)=>{
             console.log(res.data);
-            setPeople(res.data);
+            setProduct(res.data);
 	})
         .catch((err)=>{
             console.log(err);
@@ -22,11 +22,11 @@ const DisplayAllProducts = (props)=> {
 
     return (
         <div>
+            <h2>All Products</h2>
             {
                 product.map((product, index)=> (
                     <div key={product._id}>
-                        <h2>All Products</h2>
-                        <Link to={`/products/${product._id}`}><h5>{product.name}</h5></Link>
+                        <Link to={`/products/${product._id}`} ><h5>{product.title}</h5></Link>
                     </div>
                 ))
             }

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const Product = (props)=>{
 
+    const {product, setProduct}= (props);
+
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("")
@@ -23,6 +25,7 @@ const Product = (props)=>{
             setTitle("");
             setPrice("");
             setDescription("");
+            setProduct([...product, res.data])
             // navigate("/")
         })
         .catch((err)=>{
