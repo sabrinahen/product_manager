@@ -22,6 +22,18 @@ const DisplayOneProduct = (props) => {
             })
     }, [id])
 
+    const deleteOneProduct = ()=>{
+        axios.delete(`http://localhost:8000/api/products/${id}`)
+            .then((res)=>{
+                console.log(res);
+                console.log(res.data);
+                navigate("/")
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+    }
+
 
 return(
     <div>
@@ -31,6 +43,10 @@ return(
         </header>
         <h4>Price: ${product.price}</h4>
         <h4>Description: {product.description}</h4>
+        <button onClick={deleteOneProduct}>Delete</button>
+        <button>
+        <Link to={`/products/edit/${product._id}`} >Edit</Link>
+        </button>
     </div>
 )
 

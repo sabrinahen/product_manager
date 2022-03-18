@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 
-const Product = (props)=>{
+const EditProduct = (props)=>{
 
-    const {product, setProduct}= (props);
+    const [product, setProduct] = useState({});
 
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
@@ -12,9 +12,26 @@ const Product = (props)=>{
 
     const navigate = useNavigate();
 
+    const {id} = useParams();
+
+    useEffect(()=>{
+        axios.get(`http://localhost:8000/api/products/${id}`)
+            .then ((res)=> {
+                console.log(res);
+                console.log(res.data);
+                setTitle(res.data.title);
+                setPrice(res.data.price);
+                setDescription(res.data.description);
+                setProduct(res.data)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+    }, [id])
+
     const submitHandler = (e)=>{
         e.preventDefault();
-        axios.post("http://localhost:8000/api/products", {
+        axios.put(`http://localhost:8000/api/products/${id}`, {
             title,
             price,
             description
@@ -22,10 +39,6 @@ const Product = (props)=>{
         .then((res)=>{
             console.log(res);
             console.log(res.data);
-            setTitle("");
-            setPrice("");
-            setDescription("");
-            setProduct([...product, res.data])
             navigate("/")
         })
         .catch((err)=>{
@@ -35,6 +48,10 @@ const Product = (props)=>{
 
     return(
         <div>
+            <header>
+                <Link to={"/"}><h3>Go Home!</h3></Link>
+                <h2>{product.title}</h2>
+            </header>
             <h1>Product Manager</h1>
             <form onSubmit={submitHandler}>
                 <div>
@@ -52,7 +69,7 @@ const Product = (props)=>{
                     <input value={description} name="description" type="text" onChange={(e)=>setDescription(e.target.value)}/>
                 </div>
                 <br/>
-                <button>Create Product</button>
+                <button>Update Product</button>
             </form>
         </div>
     )
@@ -62,4 +79,4 @@ const Product = (props)=>{
 
 }
 
-export default Product;
+export default EditProduct;

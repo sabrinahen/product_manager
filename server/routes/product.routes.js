@@ -8,7 +8,7 @@ module.exports=(app)=> {
 
     app.get("/api/products/:id", ProductController.findOneProduct);
 
-    // app.delete("/api/products/:id", ProductController.deleteOneProduct);
+    app.delete("/api/products/:id", ProductController.deleteOneProduct);
 
-    // app.put("/api/products/:id", ProductController.updateProduct);
+    app.put("/api/products/:id", ProductController.updateProduct);
 }

@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './App.css';
 import Home from "./views/Home";
 import DisplayOneProduct from "./components/DisplayOneProduct"
+import EditProduct from './components/EditProduct';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Routes>
             <Route element={<Home/>} path="/" />
             <Route element={<DisplayOneProduct />} path="/products/:id" />
+            <Route element={<EditProduct/>} path="/products/edit/:id"/>
           </Routes>
         </div>
     </BrowserRouter>
